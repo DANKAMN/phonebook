@@ -1,0 +1,54 @@
+{
+  "persons": [
+    {
+      "name": "Arto Hellas",
+      "number": "040-123456",
+      "id": 1
+    },
+    {
+      "name": "Ada Lovelace",
+      "number": "39-44-5323523",
+      "id": 2
+    },
+    {
+      "name": "Dan Abramov",
+      "number": "12-43-234345",
+      "id": 3
+    },
+    {
+      "name": "Mary Poppendieck",
+      "number": "39-23-6423122",
+      "id": 4
+    },
+    {
+      "name": "Daniel Nicholas",
+      "number": "090-391-00-112",
+      "id": 5
+    },
+    {
+      "name": "David Beckham",
+      "number": "08174544699",
+      "id": 6
+    },
+    {
+      "name": "",
+      "number": "",
+      "id": 8
+    },
+    {
+      "name": "John",
+      "number": "3456789",
+      "id": 10
+    },
+    {
+      "name": "Sydney",
+      "number": "345654345678",
+      "id": 11
+    },
+    {
+      "name": "Runtown",
+      "number": "53678767829",
+      "id": 12
+    }
+  ]
+}
