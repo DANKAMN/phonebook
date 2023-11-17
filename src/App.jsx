@@ -6,9 +6,9 @@ const App = () => {
   const [newName, setNewName] = useState('');
   const [newNum, setNewNum] = useState('');
   const [filterText, setFilterText] = useState('');
-
+  
   useEffect(() => {
-    axios.get('https://phonebook-backend-ilkh.onrender.com/persons')
+    axios.get('https://phonebook-backend-ilkh.onrender.com/api/persons')
       .then((response) => {
         setPersons(response.data);
       })
@@ -34,7 +34,7 @@ const App = () => {
     //     .catch(error => console.log('PUT request unsuccessful', error));
     // } else {
     //   const newData = { name: newName, number: newNum };
-    //   axios.post('https://phonebook-backend-ilkh.onrender.com/persons', newData)
+    //   axios.post('https://phonebook-backend-ilkh.onrender.com/api/persons', newData)
     //     .then(response => {
     //       setPersons([...persons, response.data]);
     //       alert('New contact added to the phonebook!');
@@ -43,7 +43,7 @@ const App = () => {
     // }
 
     const newData = { name: newName, number: newNum };
-       axios.post('https://phonebook-backend-ilkh.onrender.com/persons', newData)
+       axios.post('https://phonebook-backend-ilkh.onrender.com/api/persons', newData)
          .then(response => {
            setPersons([...persons, response.data]);
            alert('New contact added to the phonebook!');
@@ -59,7 +59,7 @@ const App = () => {
     const confirmed = window.confirm(`Are you sure you want to delete ${name}?`);
 
     if (confirmed) {
-      axios.delete(`https://phonebook-backend-ilkh.onrender.com/persons/${id}`)
+      axios.delete(`https://phonebook-backend-ilkh.onrender.com/api/persons/${id}`)
         .then(response => {
           console.log(`Contact with ${id} has been deleted`);
           setPersons(persons.filter(person => person.id !== id));
