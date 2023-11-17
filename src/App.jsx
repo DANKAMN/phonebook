@@ -8,7 +8,7 @@ const App = () => {
   const [filterText, setFilterText] = useState('');
 
   useEffect(() => {
-    axios.get('http://localhost:3001/persons')
+    axios.get('https://phonebook-backend-ilkh.onrender.com/persons')
       .then((response) => {
         setPersons(response.data);
       })
@@ -23,7 +23,7 @@ const App = () => {
     // if (existingPerson) {
     //   window.confirm('Are you sure you want to update this contact')
     //   const updatedPerson = { ...existingPerson, number: newNum };
-    //   axios.put(`http://localhost:3001/persons/${existingPerson.id}`, updatedPerson)
+    //   axios.put(`/persons/${existingPerson.id}`, updatedPerson)
     //     .then(response => {
     //       const updatedPersons = persons.map(person =>
     //         person.id === existingPerson.id ? response.data : person
@@ -34,7 +34,7 @@ const App = () => {
     //     .catch(error => console.log('PUT request unsuccessful', error));
     // } else {
     //   const newData = { name: newName, number: newNum };
-    //   axios.post('http://localhost:3001/persons', newData)
+    //   axios.post('https://phonebook-backend-ilkh.onrender.com/persons', newData)
     //     .then(response => {
     //       setPersons([...persons, response.data]);
     //       alert('New contact added to the phonebook!');
@@ -43,7 +43,7 @@ const App = () => {
     // }
 
     const newData = { name: newName, number: newNum };
-       axios.post('http://localhost:3001/persons', newData)
+       axios.post('https://phonebook-backend-ilkh.onrender.com/persons', newData)
          .then(response => {
            setPersons([...persons, response.data]);
            alert('New contact added to the phonebook!');
@@ -59,7 +59,7 @@ const App = () => {
     const confirmed = window.confirm(`Are you sure you want to delete ${name}?`);
 
     if (confirmed) {
-      axios.delete(`http://localhost:3001/persons/${id}`)
+      axios.delete(`https://phonebook-backend-ilkh.onrender.com/persons/${id}`)
         .then(response => {
           console.log(`Contact with ${id} has been deleted`);
           setPersons(persons.filter(person => person.id !== id));
