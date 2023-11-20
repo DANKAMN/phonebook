@@ -7,6 +7,7 @@ const App = () => {
   const [newNum, setNewNum] = useState('');
   const [filterText, setFilterText] = useState('');
   
+  //get every person
   useEffect(() => {
     axios.get('https://phonebook-backend-ilkh.onrender.com/api/persons')
       .then((response) => {
@@ -15,45 +16,44 @@ const App = () => {
       .catch(error => console.error('Error fetching data:', error));
   }, []);
 
+  //update or post
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // const existingPerson = persons.find(person => person.name === newName);
+    //update person
+    const existingPerson = persons.find(person => person.name === newName)
 
-    // if (existingPerson) {
-    //   window.confirm('Are you sure you want to update this contact')
-    //   const updatedPerson = { ...existingPerson, number: newNum };
-    //   axios.put(`/persons/${existingPerson.id}`, updatedPerson)
-    //     .then(response => {
-    //       const updatedPersons = persons.map(person =>
-    //         person.id === existingPerson.id ? response.data : person
-    //       );
-    //       setPersons(updatedPersons);
-    //       alert('Phonebook has been updated with the new number!');
-    //     })
-    //     .catch(error => console.log('PUT request unsuccessful', error));
-    // } else {
-    //   const newData = { name: newName, number: newNum };
-    //   axios.post('https://phonebook-backend-ilkh.onrender.com/api/persons', newData)
-    //     .then(response => {
-    //       setPersons([...persons, response.data]);
-    //       alert('New contact added to the phonebook!');
-    //     })
-    //     .catch(error => console.log('POST request unsuccessful', error));
-    // }
+    if(existingPerson) {
+      const confirmed = window.confirm(`${newName} is already in the phonebook. Do you want to update the number?`)
 
-    const newData = { name: newName, number: newNum };
+      if(confirmed) {
+        const updatedPerson = { ...existingPerson, number: newNum}
+        axios.put(`https://phonebook-backend-ilkh.onrender.com/api/persons/${existingPerson.id}`, updatedPerson)
+        .then(response => {
+          const updatedPersons = persons.map(person =>
+            person.id === existingPerson.id ? response.data : person
+          );
+          setPersons(updatedPersons);
+          alert('Contact updated in the phonebook!');
+        })
+        .catch(error => console.log('PUT request unsuccessful', error));
+      }
+    } else {
+      //create new person
+      const newData = { name: newName, number: newNum };
        axios.post('https://phonebook-backend-ilkh.onrender.com/api/persons', newData)
          .then(response => {
            setPersons([...persons, response.data]);
            alert('New contact added to the phonebook!');
-         })
-         .catch(error => console.log('POST request unsuccessful', error));
-
+        })
+        .catch(error => console.log('POST request unsuccessful', error));
+    }
+    //clear input fields
     setNewName('');
     setNewNum('');
   };
 
+  //delete person
   const remove = (event, id, name) => {
     event.preventDefault();
     const confirmed = window.confirm(`Are you sure you want to delete ${name}?`);
